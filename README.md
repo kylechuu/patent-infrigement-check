@@ -19,7 +19,9 @@ This project is a Spring Boot application that connects to a local MongoDB insta
      1. Create a cluster and name the table properly.
      2. import the `patents.json` file into a collection named `patents`
      3. import the `company_products.json` file into a collection named `companies`
-     4. Note that the Json format in `company_products.json` should be reformatted by removing 'company' as a key. Each company should have `name` and `products` attributes. 
+     4. Note that the Json format in `company_products.json` should be reformatted by removing 'company' as a key. Each company should have `name` and `products` attributes.
+        ![screenshoot-data-setup](https://github.com/user-attachments/assets/9439ffe8-8a24-434c-8784-2a892e5a1d42)
+
        
 2. **MongoDB Connection**:
    - MongoDB Compass should be configured to connect locally on the specified URI.
