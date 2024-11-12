@@ -71,6 +71,7 @@ public class PromptService {
             candidates.add(relevantFactor);
         }
 
+        // greedily split the patent claims
         while (start < end) {
             StringBuilder claimSubset = new StringBuilder();
 
@@ -113,6 +114,7 @@ public class PromptService {
         OpenAiResponse openAiResponse = new OpenAiResponse();
         List<ReportDetail> top2InfringingProducts = new ArrayList<>();
 
+        // prompt second time for top 2 candidates info
         while(!top2Candidates.isEmpty()) {
             RelevantFactor candidate = top2Candidates.poll();
             String top2Prompts = this.generatePromptForTop2Candidates(candidate, claims);
@@ -141,6 +143,7 @@ public class PromptService {
             top2InfringingProducts.add(reportDetail);
         }
 
+        // prompt last time for report with top 2 candidates complete info
         openAiResponse.setTopInfringingProducts(top2InfringingProducts);
         String reportPrompt = this.generatePromptForReport(top2InfringingProducts);
         String report = this.getCompletion(reportPrompt).block();
@@ -208,18 +211,6 @@ public class PromptService {
                     }
                 });
     }
-
-//    private String buildRequestBody(String prompt) {
-////        Map<String, Object> requestBody = new HashMap<>();
-////        requestBody.put("model", model);
-////        requestBody.put("prompt", prompt);
-////        requestBody.put("max_tokens", tokens);
-////        requestBody.put("temperature", temperature);
-//
-//        GPTRequest gptRequest = new GPTRequest("gpt-3.5-turbo", prompt);
-//
-//        return requestBody;
-//    }
 
     private static void addToQueue(PriorityQueue<RelevantFactor> queue, RelevantFactor relevantFactor, int maxSize) {
         if (queue.size() >= maxSize) {
