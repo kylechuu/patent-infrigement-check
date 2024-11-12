@@ -3,10 +3,7 @@ package com.patlytics.take_home.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.patlytics.take_home.model.dto.Product;
 import com.patlytics.take_home.model.dto.ReportDetail;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;

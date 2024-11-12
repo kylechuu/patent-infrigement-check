@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class ReportDetail {
@@ -18,7 +20,7 @@ public class ReportDetail {
 
     @Field("relevant_claims")
     @JsonProperty("relevant_claims")
-    private String relevantClaims;
+    private List<String> relevantClaims;
 
     @Field("explanation")
     @JsonProperty("explanation")
@@ -26,6 +28,6 @@ public class ReportDetail {
 
     @Field("specific_features")
     @JsonProperty("specific_features")
-    private String specificFeatures;
+    private List<String> specificFeatures;
 
 }
