@@ -5,7 +5,7 @@ This project is a Spring Boot application that connects to a local MongoDB insta
 
 ## Prerequisites
 - **Java**: Java version 21.
-- **Docker** and **Docker Compose**: Version 24.0.2. Make sure Docker and Docker Compose are installed and running.
+- **Docker** and **Docker Compose**: Version 4.22.1. Make sure Docker and Docker Compose are installed and running.
 - **MongoDB Compass**: You should have MongoDB Compass installed and configured locally.
 
 ## Configuration
