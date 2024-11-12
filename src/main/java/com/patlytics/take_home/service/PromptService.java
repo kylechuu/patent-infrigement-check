@@ -167,7 +167,7 @@ public class PromptService {
         prompt.append("Given a subset of list with it's index and patent claims in Json format string and a company product Json string with it's name and description,Rate the likelihood of patent infringement by the product based on these patents from 0 to 2 (response with number only, 0 stand for irrelevant, 2 stand for completely overlapping) and the index for which patent claim may overlap (a string with index separate with comma). Return a string in the format with: overlap score like 2 | index separate with comma like 1,7,42 e.g. 2|2,5,23 You can also return \"|\" if the overlapping score is 0. Do not return extra string or other character or special character except for the format response");
         prompt.append("Here is subset of claims: " + claimSubset + " with the company information" + product.toString());
 
-        log.info("generatePromptForSubsetClaims -> prompt: {}", prompt);
+//        log.info("generatePromptForSubsetClaims -> prompt: {}", prompt);
         return prompt.toString();
     }
 
@@ -181,7 +181,7 @@ public class PromptService {
 
         prompt.append("Here is the product detail: " + gson.toJson(candidate.getProduct()) + " the claims detail: " + claimsDetail.toString());
 
-        log.info("generatePromptForTop2Candidates -> prompt: {}", prompt);
+//        log.info("generatePromptForTop2Candidates -> prompt: {}", prompt);
 
         return prompt.toString();
     }
