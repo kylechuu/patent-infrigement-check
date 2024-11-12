@@ -1,6 +1,7 @@
 package com.patlytics.take_home.service;
 
 import com.google.gson.Gson;
+import com.patlytics.take_home.exception.ResourceNotFoundException;
 import com.patlytics.take_home.model.CompanyEntity;
 import com.patlytics.take_home.model.PatentEntity;
 import com.patlytics.take_home.model.dto.*;
@@ -49,8 +50,10 @@ public class PromptService {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     public ResponseEntity<?> generateReport(PromptRequest request) throws Exception{
-        PatentEntity patent = patentRepository.findByPublicationNumber(request.getPatentId()).orElse(null);
-        CompanyEntity company = companyRepository.findByName(request.getCompanyName()).orElse(null);
+        PatentEntity patent = patentRepository.findByPublicationNumber(request.getPatentId()).orElseThrow(ResourceNotFoundException::new);
+        log.info("Patent from DB: " + gson.toJson(patent));
+        CompanyEntity company = companyRepository.findByName(request.getCompanyName()).orElseThrow(ResourceNotFoundException::new);
+        log.info("Company from DB: " + gson.toJson(company));
         List<Claim> claims = new ArrayList<>();
 
         if (patent != null && patent.getClaims() != null) {
@@ -83,7 +86,7 @@ public class PromptService {
                 log.info(result);
 
                 // score | index1, index2
-                String[] parts = result.split("\\|");
+                String[] parts = Arrays.stream(result.split("\\|")).map(String::trim).toArray(String[]::new);
                 if(parts.length <= 1) continue;
                 log.info("score: {}, index: {}", parts[0], parts[1]);
 
@@ -113,7 +116,7 @@ public class PromptService {
         while(!top2Candidates.isEmpty()) {
             RelevantFactor candidate = top2Candidates.poll();
             String top2Prompts = this.generatePromptForTop2Candidates(candidate, claims);
-            String[] top2Details = this.getCompletion(top2Prompts).block().split("\\|");
+            String[] top2Details = Arrays.stream(this.getCompletion(top2Prompts).block().split("\\|")).map(String::trim).toArray(String[]::new);
             ReportDetail reportDetail = new ReportDetail();
 
             reportDetail.setProductName(candidate.getProduct().getName());
