@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:6.0
+    container_name: mongodb-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+
+  springboot-app:
+    build: .
+    container_name: springboot-container
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb+srv://akai20035:Akaigod%400824@c1.nqvts.mongodb.net/prod
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    restart: always
+
+volumes:
+  mongo_data:
