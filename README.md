@@ -3,8 +3,8 @@
 ## Overview
 This project is a Spring Boot application that connects to a local MongoDB instance through MongoDB Compass. For version 1.0 now It includes one main endpoint and is configured to run with Docker Compose.
 
-## Validate purpose
-- This full stack app is deployed and now it can be accessed directly from the [link](https://valid-emlyn-patlytics-take-home-c1ac8675.koyeb.app/)
+## Production application is running!
+- This full stack app is deployed and now it can be accessed directly from the [patent-infiringment-check-app-link](https://valid-emlyn-patlytics-take-home-c1ac8675.koyeb.app/)
 - Both frontend and backend are deployed on [Koyeb](https://www.koyeb.com/) The reason is because it's free!
 - The Database is deployed on MongoDB Altas.
 - The API call may be took 15sec ~ 30sec to finish, so please do not fetch the backend too frquent! (the spinging icon, styling, etc. is on the way...) 
@@ -17,8 +17,9 @@ This project is a Spring Boot application that connects to a local MongoDB insta
 
 ## Configuration
 1. **Application Properties**: 
-   - Locate the `application.properties` file in the `src/main/resources` directory.
-   - Set up the following properties:
+   - Creare the `application-dev.properties` file in the `src/main/resources` directory.
+   - Copy all the field from `application-prod.properties` and set the `spring.profiles.active=prod` in application.properties
+   - Set up the following properties: 
      - `openai.api.key`: Insert your OpenAI API key.
      - `spring.data.mongodb.uri`: Set the local MongoDB Compass URI here.
        
@@ -31,7 +32,7 @@ This project is a Spring Boot application that connects to a local MongoDB insta
 
        
 2. **MongoDB Connection**:
-   - MongoDB Compass should be configured to connect locally on the specified URI.
+   - MongoDB Compass should be configured to connect on the specified URI.
    - Ensure the MongoDB server is running and accessible from the Docker container.
 
 ## Docker Setup
@@ -54,8 +55,9 @@ This project is a Spring Boot application that connects to a local MongoDB insta
      ```bash
      docker-compose down
      ```
-
-## Endpoints
+## FrontEnd
+`http://localhost:3000/`
+## Backend Endpoints
 Once the application is running, you can access the following endpoints:
 
 - **generate report GET**: `http://localhost:8080/api/v1/generate-report`
@@ -73,6 +75,7 @@ Once the application is running, you can access the following endpoints:
   - TO-DO
 
 ## Additional Notes
+- **BackEnd Endpoint**: The backend endpoint is deployed in URL `ideological-alverta-side-project-kyle-37574475.koyeb.app/` We can replace `localhost:8080/` part for testing in production if prefer.
 - **Environment Variables**: Ensure sensitive information like API keys is managed securely.
 - **Testing**:
   1. Configure properties setting listed above and prepare the data locally.
