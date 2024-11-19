@@ -97,14 +97,21 @@ Once the application is running, you can access the following endpoints:
        ```
 
 ## Comment
-- Despite the fact that this project is conducted in a short time (also in rush), I found the project very interesting and somewhat challenging.
-- I sincerely hope for an opportunity to explore potential enhancements, both in non-functional requirements and in the prompting algorithm.
-- At first, I tried prompting the AI with a large string all at once, which failed. I then developed a greedy algorithm to solve this issue.
-- The API may sometimes fail due to inconsistencies in the prompt results or formatting. Usually, retrying the endpoint will improve the outcome.
+- Although this project was completed in a short time and under tight deadlines, I found it both interesting and somewhat challenging.
+- I hope for the opportunity to explore potential improvements, both in the non-functional requirements and the prompting algorithm.
+- Initially, I tried providing the AI with a large string all at once, but that approach failed. Later, I implemented a greedy algorithm to resolve the issue.
+- The API may occasionally fail due to inconsistencies in the prompt results or formatting. Typically, retrying the endpoint will lead to a better outcome.
 
 ## Troubleshooting
 - **Connection Issues**: If the application fails to connect to MongoDB, verify the URI and MongoDB service status.
 - **Docker-Related Issues**: Make sure Docker is running and that there are no conflicts on the mapped ports.
+
+## TO-DO
+- **Frontend styling**: Obviously, the UI sucks.
+- **Frontend components**: TO-DO
+- **Prompting algorithm enhancement**: The result from OpenAI is not stable and response formation also has room to improve.
+- **Exception handling**: Scenario for exceptions are not considered comprehensively.
+- **Storing report and retrieving function**: TO-DO
 
 ## Reference Links
 - [Docker-download](https://gist.github.com/kupietools/2f9f085228d765da579f0f0702bec33c)
