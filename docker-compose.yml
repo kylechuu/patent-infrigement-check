@@ -16,10 +16,10 @@ services:
       - app-network
 
   springboot-app:
-    image: kylechuu/backend:latest
-    # build: 
-    #   context: ./backend
-    #   dockerfile: Dockerfile
+    # image: kylechuu/backend:latest
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: springboot-container
     environment:
       SPRING_PROFILES_ACTIVE: prod
@@ -33,10 +33,10 @@ services:
       - app-network
 
   frontend:
-    mage: kylechuu/frontend:latest
-    # build:
-    #   context: ./frontend
-    #   dockerfile: Dockerfile
+    # image: kylechuu/frontend:latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
       - "3000:80"
     environment:
