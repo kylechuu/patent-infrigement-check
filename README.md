@@ -36,7 +36,9 @@ This project is a Spring Boot application that connects to a local MongoDB insta
    - Ensure the MongoDB server is running and accessible from the Docker container.
 
 ## Docker Setup
-1. **Build Docker Images**:
+1.   **Configure enviornment variable**:
+   - Please change the backend endpoint in `App.js` for the axois endpoint to local and also the backend endpoint in `docker-compose` file before building.
+1-a. **Build Docker Images**:
    - Navigate to the project root directory and run the following command to build the Docker images:
      ```bash
      docker-compose build
