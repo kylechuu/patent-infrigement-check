@@ -3,8 +3,8 @@
 ## Overview
 This project is a Spring Boot application that connects to a local MongoDB instance through MongoDB Compass. For version 1.0 now It includes one main endpoint and is configured to run with Docker Compose.
 
-## Validate purpose
-- This full stack app is deployed and now it can be accessed directly from the [link](https://valid-emlyn-patlytics-take-home-c1ac8675.koyeb.app/)
+## Production application is running!
+- This full stack app is deployed and now it can be accessed directly from the [patent-infiringment-check-app-link](https://valid-emlyn-patlytics-take-home-c1ac8675.koyeb.app/)
 - Both frontend and backend are deployed on [Koyeb](https://www.koyeb.com/) The reason is because it's free!
 - The Database is deployed on MongoDB Altas.
 - The API call may be took 15sec ~ 30sec to finish, so please do not fetch the backend too frquent! (the spinging icon, styling, etc. is on the way...) 
@@ -17,8 +17,9 @@ This project is a Spring Boot application that connects to a local MongoDB insta
 
 ## Configuration
 1. **Application Properties**: 
-   - Locate the `application.properties` file in the `src/main/resources` directory.
-   - Set up the following properties:
+   - Creare the `application-dev.properties` file in the `src/main/resources` directory.
+   - Copy all the field from `application-prod.properties` and set the `spring.profiles.active=prod` in application.properties
+   - Set up the following properties: 
      - `openai.api.key`: Insert your OpenAI API key.
      - `spring.data.mongodb.uri`: Set the local MongoDB Compass URI here.
        
@@ -31,17 +32,20 @@ This project is a Spring Boot application that connects to a local MongoDB insta
 
        
 2. **MongoDB Connection**:
-   - MongoDB Compass should be configured to connect locally on the specified URI.
+   - MongoDB Compass should be configured to connect on the specified URI.
    - Ensure the MongoDB server is running and accessible from the Docker container.
 
 ## Docker Setup
-1. **Build Docker Images**:
+1.   **Configure enviornment variable**:
+   - Please change the backend endpoint in `App.js` for the axois endpoint to local and also the backend endpoint in `docker-compose` file before building.
+   - From the backend Dockerfile please point the enviornment to the `dev` rather than `prod` before building.
+2. **Build Docker Images**:
    - Navigate to the project root directory and run the following command to build the Docker images:
      ```bash
      docker-compose build
      ```
 
-2. **Run with Docker Compose**:
+3. **Run with Docker Compose**:
    - Start the application and MongoDB using Docker Compose:
      ```bash
      docker-compose up
@@ -49,16 +53,17 @@ This project is a Spring Boot application that connects to a local MongoDB insta
    - Ensure the `spring.data.mongodb.uri` value matches the SPRING_DATA_MONGODB_URI value in the compose.yaml file..
 
 
-3. **Stop Containers**:
+4. **Stop Containers**:
    - To stop the containers, use:
      ```bash
      docker-compose down
      ```
-
-## Endpoints
+## FrontEnd
+`http://localhost:3000/`
+## Backend Endpoints
 Once the application is running, you can access the following endpoints:
 
-- **generate report GET**: `http://localhost:8080/api/v1/generate-report`
+- **generate report POST**: `http://localhost:8080/api/v1/generate-report`
   - This endpoint will consume the Json format payload `patentId` as patent id and `companyName` as company name -> Retrieve the company info and patent info -> start prompting the score and patent features given the list of a company and then generate the assessment.
   - Currently, the API does not store the report in the database.
     
@@ -73,6 +78,7 @@ Once the application is running, you can access the following endpoints:
   - TO-DO
 
 ## Additional Notes
+- **BackEnd Endpoint**: The backend endpoint is deployed in URL `ideological-alverta-side-project-kyle-37574475.koyeb.app/` We can replace `localhost:8080/` part for testing in production if prefer.
 - **Environment Variables**: Ensure sensitive information like API keys is managed securely.
 - **Testing**:
   1. Configure properties setting listed above and prepare the data locally.
@@ -87,18 +93,25 @@ Once the application is running, you can access the following endpoints:
      and hit the endpoint list above with GET request, you should be able to get a report response.
      Alternatively, you can use the following command to hit the endpoint:
        ```bash
-       curl -X GET "http://localhost:8080/api/v1/generate-report" -H "Content-Type: application/json" -d `{"patentId":"US-RE49889-E1", "companyName": "Walmart Inc."}`
+       curl -X POST "http://localhost:8080/api/v1/generate-report" -H "Content-Type: application/json" -d `{"patentId":"US-RE49889-E1", "companyName": "Walmart Inc."}`
        ```
 
 ## Comment
-- Despite the fact that this project is conducted in a short time (also in rush), I found the project very interesting and somewhat challenging.
-- I sincerely hope for an opportunity to explore potential enhancements, both in non-functional requirements and in the prompting algorithm.
-- At first, I tried prompting the AI with a large string all at once, which failed. I then developed a greedy algorithm to solve this issue.
-- The API may sometimes fail due to inconsistencies in the prompt results or formatting. Usually, retrying the endpoint will improve the outcome.
+- Although this project was completed in a short time and under tight deadlines, I found it both interesting and somewhat challenging.
+- I hope for the opportunity to explore potential improvements, both in the non-functional requirements and the prompting algorithm.
+- Initially, I tried providing the AI with a large string all at once, but that approach failed. Later, I implemented a greedy algorithm to resolve the issue.
+- The API may occasionally fail due to inconsistencies in the prompt results or formatting. Typically, retrying the endpoint will lead to a better outcome.
 
 ## Troubleshooting
 - **Connection Issues**: If the application fails to connect to MongoDB, verify the URI and MongoDB service status.
 - **Docker-Related Issues**: Make sure Docker is running and that there are no conflicts on the mapped ports.
+
+## TO-DO
+- **Frontend styling**: Obviously, the UI sucks.
+- **Frontend components**: TO-DO
+- **Prompting algorithm enhancement**: The result from OpenAI is not stable and response formation also has room to improve.
+- **Exception handling**: Scenario for exceptions are not considered comprehensively.
+- **Storing report and retrieving function**: TO-DO
 
 ## Reference Links
 - [Docker-download](https://gist.github.com/kupietools/2f9f085228d765da579f0f0702bec33c)
