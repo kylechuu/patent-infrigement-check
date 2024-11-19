@@ -38,6 +38,7 @@ This project is a Spring Boot application that connects to a local MongoDB insta
 ## Docker Setup
 1.   **Configure enviornment variable**:
    - Please change the backend endpoint in `App.js` for the axois endpoint to local and also the backend endpoint in `docker-compose` file before building.
+   - From the backend Dockerfile please point the enviornment to the `dev` rather than `prod` before building.
 2. **Build Docker Images**:
    - Navigate to the project root directory and run the following command to build the Docker images:
      ```bash
@@ -62,7 +63,7 @@ This project is a Spring Boot application that connects to a local MongoDB insta
 ## Backend Endpoints
 Once the application is running, you can access the following endpoints:
 
-- **generate report GET**: `http://localhost:8080/api/v1/generate-report`
+- **generate report POST**: `http://localhost:8080/api/v1/generate-report`
   - This endpoint will consume the Json format payload `patentId` as patent id and `companyName` as company name -> Retrieve the company info and patent info -> start prompting the score and patent features given the list of a company and then generate the assessment.
   - Currently, the API does not store the report in the database.
     
@@ -92,7 +93,7 @@ Once the application is running, you can access the following endpoints:
      and hit the endpoint list above with GET request, you should be able to get a report response.
      Alternatively, you can use the following command to hit the endpoint:
        ```bash
-       curl -X GET "http://localhost:8080/api/v1/generate-report" -H "Content-Type: application/json" -d `{"patentId":"US-RE49889-E1", "companyName": "Walmart Inc."}`
+       curl -X POST "http://localhost:8080/api/v1/generate-report" -H "Content-Type: application/json" -d `{"patentId":"US-RE49889-E1", "companyName": "Walmart Inc."}`
        ```
 
 ## Comment
