@@ -10,7 +10,7 @@ function App() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const result = await axios.post('http://localhost:8080/api/v1/generate-report', {
+            const result = await axios.post('https://ideological-alverta-side-project-kyle-37574475.koyeb.app/api/v1/generate-report', {
               patentId: patentId,
               companyName: companyName
             }, { headers: { 'Content-Type': 'application/json' }});
@@ -42,10 +42,15 @@ function App() {
         </form>
         {response && (
             <div>
-                <h2>Company Details:</h2>
+                <h1>Infriginment Report</h1>
+                <pre>{JSON.stringify(response, null, 2)}</pre>
+                {/* <h2>Company Details:</h2> */}
+                {/* <p>ID: {response.analysis_id}</p>
                 <p>ID: {response.patent_id}</p>
                 <p>Name: {response.company_name}</p>
-                <p>Details: {response.overall_risk_assessment}</p>
+                <p>ID: {response.analysis_date}</p>
+                <p>ID: {response.top_infringing_products}</p>
+                <p>Details: {response.overall_risk_assessment}</p> */}
             </div>
         )}
     </div>

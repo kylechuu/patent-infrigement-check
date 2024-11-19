@@ -3,10 +3,17 @@
 ## Overview
 This project is a Spring Boot application that connects to a local MongoDB instance through MongoDB Compass. For version 1.0 now It includes one main endpoint and is configured to run with Docker Compose.
 
+## Validate purpose
+- This full stack app is deployed and now it can be accessed directly from the [link](https://valid-emlyn-patlytics-take-home-c1ac8675.koyeb.app/)
+- Both frontend and backend are deployed on [Koyeb](https://www.koyeb.com/) The reason is because it's free!
+- The Database is deployed on MongoDB Altas.
+- The API call may be took 15sec ~ 30sec to finish, so please do not fetch the backend too frquent! (the spinging icon, styling, etc. is on the way...) 
+
 ## Prerequisites
 - **Java**: Java version 21.
 - **Docker** and **Docker Compose**: Version 4.22.1. Make sure Docker and Docker Compose are installed and running.
 - **MongoDB Compass**: You should have MongoDB Compass installed and configured locally.
+- **React**: node 16 (the README for frontend is still in TO-DO)
 
 ## Configuration
 1. **Application Properties**: 

@@ -1,12 +1,50 @@
-version: '2'
+version: '3.8'
+
 services:
-  backend:
-    build:
-      context: ./backend
+  mongo:
+    image: mongo:6.0
+    container_name: mongodb-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+    networks:
+      - app-network
+
+  springboot-app:
+    image: kylechuu/backend:latest
+    # build: 
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    container_name: springboot-container
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATA_MONGODB_URI: {SPRING_DATA_MONGODB_URI}
     ports:
       - "8080:8080"
+    depends_on:
+      - mongo
+    restart: always
+    networks:
+      - app-network
+
   frontend:
-    build:
-      context: ./frontend
+    mage: kylechuu/frontend:latest
+    # build:
+    #   context: ./frontend
+    #   dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "3000:80"
+    environment:
+      - REACT_APP_API_URL=http://springboot-app:8080
+    networks:
+      - app-network
+
+volumes:
+  mongo_data:
+networks:
+  app-network:
