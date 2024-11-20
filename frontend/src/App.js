@@ -26,31 +26,24 @@ function App() {
     };
 
   return (
-    <div>
-        <h1>Patent Infriginment Check</h1>
-        <h1>Please input the required fields to generate report</h1>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Patent ID:</label>
-                <input type="text" value={patentId} onChange={(e) => setPatentId(e.target.value)} />
+    <div className="app-container">
+        <h1 className="app-title">Patent Infringement Check</h1>
+        <h1 className="app-subtitle">Please input the required fields to generate report</h1>
+        <form className="form-container" onSubmit={handleSubmit}>
+            <div className="form-group">
+                <label htmlFor="patentId">Patent ID:</label>
+                <input type="text" id="patentId" value={patentId} onChange={(e) => setPatentId(e.target.value)} className="form-input" placeholder="Enter Patent ID" />
             </div>
-            <div>
-                <label>Company Name:</label>
-                <input type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+            <div className="form-group">
+                <label htmlFor="companyName">Company Name:</label>
+                <input type="text" id="companyName" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="form-input" placeholder="Enter Company Name"/>
             </div>
-            <button type="submit">submit</button>
+            <button type="submit" className="submit-button">Submit</button>
         </form>
         {response && (
-            <div>
-                <h1>Infriginment Report</h1>
-                <pre>{JSON.stringify(response, null, 2)}</pre>
-                {/* <h2>Company Details:</h2> */}
-                {/* <p>ID: {response.analysis_id}</p>
-                <p>ID: {response.patent_id}</p>
-                <p>Name: {response.company_name}</p>
-                <p>ID: {response.analysis_date}</p>
-                <p>ID: {response.top_infringing_products}</p>
-                <p>Details: {response.overall_risk_assessment}</p> */}
+            <div className="response-container">
+                <h1>Infringement Report</h1>
+                <pre className="response-content">{JSON.stringify(response, null, 2)}</pre>
             </div>
         )}
     </div>

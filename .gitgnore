@@ -2,3 +2,5 @@ take-home.iml
 .idea/
 .vscode/
 backend/src/main/resources/application-dev.properties
+*.iml
+*.xml
