@@ -27,6 +27,13 @@
   justify-content: center;
 }
 
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; /* Adjust as needed */
+}
+
 /* Titles */
 .app-title {
   font-size: 24px;
