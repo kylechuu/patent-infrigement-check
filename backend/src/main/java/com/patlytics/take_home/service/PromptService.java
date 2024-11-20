@@ -178,7 +178,7 @@ public class PromptService {
         prompt.append("Given the related patent claims, please return a response string concatenated with \"|\" with 2 prompt's answer. 1st: Return an explanation limit in 200 tokens with the overlapping of claims and product. 2nd: Return a list of specific features separated with comma with limit within 50 tokens in total from the product that potentially infringe the patent e.g. The app's implementation of digital advertisement display and product data handling closely matches the patent's specifications|Mobile app integration,Shopping list synchronization");
         StringBuilder claimsDetail = new StringBuilder();
         for (Integer index: candidate.getIndex()){
-            claimsDetail.append(claims.get(index).getText());
+            claimsDetail.append(claims.get(Math.max(index - 1, 0)).getText());
         }
 
         prompt.append("Here is the product detail: " + gson.toJson(candidate.getProduct()) + " the claims detail: " + claimsDetail.toString());
