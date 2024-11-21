@@ -1,0 +1,84 @@
+/* Reports Page Container
+.reports-container {
+    padding: 20px;
+    text-align: left;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--background-color-primary);
+    border-radius: var(--border-radius-small);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reports-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: var(--text-color-primary);
+  }
+  
+  .report-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color-primary);
+    border-radius: var(--border-radius-small);
+    background-color: var(--background-color-primary);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .report-item:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  } */
+
+  /* Main Content Styling */
+.main-content {
+    margin-left: 250px; /* This accounts for the sidebar width */
+    padding: 20px;
+    background-color: var(--background-color-primary, #ffffff);
+    color: var(--text-color-primary);
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 24px;
+    color: var(--text-color-primary);
+    margin-bottom: 20px;
+}
+
+.fetch-button {
+    background-color: var(--button-color-primary, #57dc2f);
+    color: var(--background-color-primary, #ffffff);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-small, 5px);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.fetch-button:hover {
+    background-color: var(--button-color-hover, #45b828);
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.reports-container {
+    background-color: var(--base-color-neutral--neutral-light, #f9f9f9);
+    padding: 20px;
+    border-radius: var(--border-radius-small);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    white-space: pre-wrap;
+    font-family: monospace;
+    color: var(--text-color-primary);
+}
+
+.reports-container pre {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+}

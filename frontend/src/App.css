@@ -25,6 +25,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* align-items: stretch */
 }
 
 .spinner-container {
@@ -32,69 +33,6 @@
   justify-content: center;
   align-items: center;
   height: 200px; /* Adjust as needed */
-}
-
-/* Titles */
-.app-title {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: var(--text-color-primary);
-}
-
-.app-subtitle {
-  font-size: 16px;
-  margin-bottom: 20px;
-  color: var(--text-color-primary);
-}
-
-/* Form Styles */
-.form-container {
-  width: 100%;
-  max-width: 400px;
-  background-color: var(--background-color-primary);
-  padding: 20px;
-  border-radius: var(--border-radius-small);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--border-color-primary);
-}
-
-.form-group {
-  margin-bottom: 15px;
-  text-align: left;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: var(--text-color-primary);
-}
-
-.form-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid var(--border-color-primary);
-  border-radius: var(--border-radius-small);
-  font-size: 14px;
-  color: var(--text-color-primary);
-  background-color: var(--background-color-primary);
-}
-
-/* Submit Button */
-.submit-button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  color: var(--text-color-primary);
-  background-color: var(--link-color-primary);
-  border: none;
-  border-radius: var(--border-radius-small);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-  background-color: var(--base-color-neutral--neutral-light, #a3a1a1);
 }
 
 /* Response Container */
