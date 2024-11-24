@@ -8,6 +8,8 @@ function InputForm() {
     const [companyName, setCompanyName] = useState('');
     const [response, setResponse] = useState(null);
     const [loading, setLoading] = useState(false); // Track the loading state
+    const [showModal, setShowModal] = useState(false); // Modal visibility state
+    const [saving, setSaving] = useState(false); // Track saving state
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,11 +17,12 @@ function InputForm() {
         setResponse(null);
 
         try {
-            const result = await axios.post('https://ideological-alverta-side-project-kyle-37574475.koyeb.app/api/v1/generate-report', {
+            const result = await axios.post('http://localhost:8080/api/v1/generate-report', {
               patentId: patentId,
               companyName: companyName
             }, { headers: { 'Content-Type': 'application/json' }});
             setResponse(result.data); // Store the response in state
+            setShowModal(true); // Show the modal after a successful response
             console.log("Full response object:", result); // Log to inspect the structure
             console.log("Response data:", result.data); // Ensure data field contains expected JSON
             console.log("Patent ID:", result.data.patent_id);
@@ -30,6 +33,26 @@ function InputForm() {
         } finally {
             setLoading(false); // Set loading to false when the request is finished
         }
+    };
+
+    const handleSaveReport = async () => {
+        setSaving(true);
+        try {
+            await axios.put('http://localhost:8080/api/v1/report', response, {
+                headers: { 'Content-Type': 'application/json' }
+            });
+            alert('Report saved successfully!');
+        } catch (error) {
+            console.error("Error saving report:", error);
+            alert('Failed to save report');
+        } finally {
+            setSaving(false);
+            setShowModal(false); // Close the modal after saving
+        }
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false); // Close the modal without saving
     };
 
   return (
@@ -62,6 +85,22 @@ function InputForm() {
                 <pre className="response-content">{JSON.stringify(response, null, 2)}</pre>
             </div>
         )}
+
+        {/* Modal for saving the report */}
+        {showModal && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <h2>Report Generated</h2>
+                        <pre className="json-display">{JSON.stringify(response, null, 2)}</pre>
+                        <div className="modal-actions">
+                            <button className="save-button" onClick={handleSaveReport} disabled={saving}>
+                                {saving ? 'Saving...' : 'Save'}
+                            </button>
+                            <button className="close-button" onClick={handleCloseModal}>Close</button>
+                        </div>
+                    </div>
+                </div>
+            )}
     </div>
   );
 }

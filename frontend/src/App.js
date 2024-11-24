@@ -8,12 +8,14 @@ import './App.css';
 function App() {
     return (
         <Router>
-            <div className="app-container">
+            <div className="app-layout">
                 <Sidebar />
-                <Routes>
-                    <Route path="/" element={<InputForm />} />
-                    <Route path="/reports" element={<Report />} />
-                </Routes>
+                <div className="main-content">
+                    <Routes>
+                        <Route path="/" element={<InputForm />} />
+                        <Route path="/reports" element={<Report />} />
+                    </Routes>
+                </div>
             </div>
         </Router>
     );

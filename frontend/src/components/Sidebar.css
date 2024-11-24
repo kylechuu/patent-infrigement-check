@@ -13,6 +13,7 @@
     border-right: 1px solid var(--border-color-primary);
     box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
     z-index: 1000; /* Ensures the sidebar stays above other elements */
+    flex: 0 0 250px; /* Fixed width for the sidebar */
 }
 
 .sidebar h2 {

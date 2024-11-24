@@ -13,6 +13,7 @@ import com.patlytics.take_home.response.GPTResponse;
 import com.patlytics.take_home.response.OpenAiResponse;
 import com.patlytics.take_home.response.PromptResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -49,10 +50,40 @@ public class PromptService {
     private final Gson gson = new Gson();
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public ResponseEntity<?> generateReport(PromptRequest request) throws Exception{
+    public ResponseEntity<?> generateReportTest(PromptRequest request) throws Exception {
+        List<ReportDetail> top2InfringingProducts = new ArrayList<>();
+        top2InfringingProducts.add(new ReportDetail());
+
+        PromptResponse response = new PromptResponse(
+                top2InfringingProducts,
+                "Mock report",
+                "2024-11-22 19:37:53",
+                "Walmart Inc.",
+                request.getPatentId(),
+                UUID.randomUUID().toString()
+
+        );
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+    }
+
+    public ResponseEntity<?> generateReport(PromptRequest request) throws Exception {
         PatentEntity patent = patentRepository.findByPublicationNumber(request.getPatentId()).orElseThrow(ResourceNotFoundException::new);
         log.info("Patent from DB: " + gson.toJson(patent));
-        CompanyEntity company = companyRepository.findByName(request.getCompanyName()).orElseThrow(ResourceNotFoundException::new);
+
+        // deal with fuzzy input using levenshteinDistance
+        List<String> companies = companyRepository
+                .findAllName()
+                .stream()
+                .map(CompanyEntity::getName)
+                .distinct()
+                .collect(Collectors.toList());;
+        String companyName =  getCorrectCompanyName(request.getCompanyName(), companies);
+        log.info("company name is: {}", companyName);
+
+
+        CompanyEntity company = companyRepository.findByName(companyName).orElseThrow(ResourceNotFoundException::new);
         log.info("Company from DB: " + gson.toJson(company));
         List<Claim> claims = new ArrayList<>();
 
@@ -153,7 +184,7 @@ public class PromptService {
                 top2InfringingProducts,
                 report,
                 LocalDateTime.now().format(formatter),
-                request.getCompanyName(),
+                companyName,
                 request.getPatentId(),
                 UUID.randomUUID().toString()
 
@@ -212,6 +243,22 @@ public class PromptService {
                         return "Error: No response from OpenAI.";
                     }
                 });
+    }
+
+    public static String getCorrectCompanyName(String request, List<String> companies) {
+        LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
+        String mostSimilar = null;
+        int lowestDistance = Integer.MAX_VALUE;
+
+        for (String candidate : companies) {
+            int distance = levenshteinDistance.apply(request, candidate);
+            if (distance < lowestDistance) {
+                lowestDistance = distance;
+                mostSimilar = candidate;
+            }
+        }
+
+        return mostSimilar;
     }
 
     private static void addToQueue(PriorityQueue<RelevantFactor> queue, RelevantFactor relevantFactor, int maxSize) {

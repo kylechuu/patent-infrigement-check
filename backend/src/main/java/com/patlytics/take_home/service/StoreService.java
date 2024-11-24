@@ -1,5 +1,6 @@
 package com.patlytics.take_home.service;
 
+import com.patlytics.take_home.model.ReportEntity;
 import com.patlytics.take_home.repository.report.ReportRepository;
 import com.patlytics.take_home.response.PromptResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +19,18 @@ public class StoreService {
     ReportRepository reportRepository;
 
     public ResponseEntity<?> getReport() {
-        List<PromptResponse> reports =  reportRepository.findAll();
+        List<ReportEntity> reports =  reportRepository.findAll();
         return ResponseEntity.status(HttpStatus.CREATED).body(reports);
     }
 
-    public ResponseEntity<?> saveReport(PromptResponse promptReport) {
-        reportRepository.save(promptReport);
+    public ResponseEntity<?> saveReport(ReportEntity promptReport) {
+        try {
+            reportRepository.save(promptReport);
+            System.out.println("Report saved successfully!");
+        } catch (Exception e) {
+            System.err.println("Error saving report: " + e.getMessage());
+            e.printStackTrace();
+        }
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

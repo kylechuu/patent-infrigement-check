@@ -1,5 +1,6 @@
 package com.patlytics.take_home.controller;
 
+import com.patlytics.take_home.model.ReportEntity;
 import com.patlytics.take_home.request.PromptRequest;
 import com.patlytics.take_home.response.PromptResponse;
 import com.patlytics.take_home.service.PromptService;
@@ -25,12 +26,17 @@ public class PromptController {
         return promptService.generateReport(promptRequest);
     }
 
-    @PutMapping("/save-report")
-    public ResponseEntity<?> saveReport(@RequestBody PromptResponse promptReport) throws Exception {
+    @PostMapping("/generate-report-test")
+    public ResponseEntity<?> generateReportTest(@RequestBody PromptRequest promptRequest) throws Exception {
+        return promptService.generateReportTest(promptRequest);
+    }
+
+    @PutMapping("/report")
+    public ResponseEntity<?> saveReport(@RequestBody ReportEntity promptReport) throws Exception {
         return storeService.saveReport(promptReport);
     }
 
-    @DeleteMapping("/delete-report")
+    @DeleteMapping("/report/{id}")
     public ResponseEntity<?> deleteReport(@PathVariable String id) throws Exception {
         return storeService.deleteReport(id);
     }

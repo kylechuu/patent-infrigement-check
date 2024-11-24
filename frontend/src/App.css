@@ -28,6 +28,12 @@
   /* align-items: stretch */
 }
 
+.app-layout {
+  display: flex;
+  flex-direction: row; /* Sidebar and content are side by side */
+  min-height: 100vh; /* Full viewport height */
+}
+
 .spinner-container {
   display: flex;
   justify-content: center;
@@ -53,4 +59,76 @@
   white-space: pre-wrap;
   word-wrap: break-word;
   color: var(--text-color-primary);
+}
+
+.main-content {
+  margin-left: 250px; /* Aligns content to the right of the sidebar */
+  flex: 1; /* Takes up remaining space */
+  padding: 20px;
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+  background-color: var(--background-color-primary, #ffffff);
+  color: var(--text-color-primary);
+  overflow-y: auto;
+}
+
+.sidebar-toggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: var(--button-color-primary, #57dc2f);
+  color: var(--background-color-primary, #ffffff);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius-small, 5px);
+  cursor: pointer;
+  z-index: 1200; /* Above everything */
+  display: none; /* Hidden by default */
+}
+
+@media (max-width: 768px) {
+  .sidebar-toggle {
+      display: block; /* Show toggle button on smaller screens */
+  }
+
+  .sidebar {
+      position: absolute; /* Sidebar overlays content */
+      z-index: 1100;
+      transform: translateX(-250px); /* Hidden by default */
+      transition: transform 0.3s ease;
+  }
+
+  .sidebar.active {
+      transform: translateX(0); /* Visible when active */
+  }
+}
+
+
+@media (max-width: 768px) {
+  .app-layout {
+      flex-direction: column; /* Stack sidebar and content vertically */
+  }
+
+  .sidebar {
+      position: relative; /* Sidebar is part of the flow */
+      width: 100%; /* Full width for sidebar */
+      min-height: auto; /* Adjust height */
+      border-right: none; /* Remove border */
+      box-shadow: none; /* Remove shadow */
+  }
+
+  .main-content {
+      margin-left: 0; /* No margin since sidebar stacks above */
+      padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar h2 {
+      font-size: 16px; /* Smaller title font */
+  }
+
+  .sidebar-link {
+      font-size: 14px; /* Smaller link font */
+      padding: 8px;
+  }
 }
