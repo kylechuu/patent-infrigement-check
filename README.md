@@ -5,6 +5,7 @@ This project is a Spring Boot application that connects to a local MongoDB insta
 
 ## Production application is running!
 - This full stack app is deployed and now it can be accessed directly from the [patent-infiringment-check-app-link](https://frontend-latest-lvpf.onrender.com)
+- Please note that as the service is deployed in serverless & free-tier cloud service, the first lanuch of the app will endure cold start so please wait up to 40 sec to render. 
 - Frontend are deployed on [Render](https://render.com/) backend are deployed on [GCP Cloud Run](https://cloud.google.com) The reason is because it's free!
 - The Database is deployed on MongoDB Altas.
 - The API call may be took 15sec ~ 30sec to finish, so please do not fetch the backend too frquent! (the spinging icon, styling, etc. is on the way...) 
@@ -130,7 +131,7 @@ Once the application is running, you can access the following endpoints:
 - **Connection Issues**: If the application fails to connect to MongoDB, verify the URI and MongoDB service status.
 - **Docker-Related Issues**: Make sure Docker is running and that there are no conflicts on the mapped ports.
 
-## TO-DO
+## Note
 - **Frontend styling**: Obviously, the UI sucks.
 - **Frontend components**: report and input form.
 - **Prompting algorithm enhancement**: The result from OpenAI is not stable and response formation also has room to improve.
