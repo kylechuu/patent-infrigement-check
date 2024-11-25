@@ -12,7 +12,7 @@ function Report() {
         setReports([]);
 
         try {
-            const result = await axios.get('http://localhost:8080/api/v1/reports', {
+            const result = await axios.get('https://patent-infringement-check-17325157242.us-central1.run.app/api/v1/reports', {
                 headers: { 'Content-Type': 'application/json' },
             });
             setReports(result.data);
@@ -26,7 +26,7 @@ function Report() {
     // Delete a report by ID
     const deleteReport = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/api/v1/report/${id}`, {
+            await axios.delete(`https://patent-infringement-check-17325157242.us-central1.run.app/api/v1/report/${id}`, {
                 headers: { 'Content-Type': 'application/json' },
             });
             alert(`Report with ID: ${id} deleted successfully!`);

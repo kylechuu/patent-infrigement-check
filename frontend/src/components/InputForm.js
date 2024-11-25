@@ -17,7 +17,7 @@ function InputForm() {
         setResponse(null);
 
         try {
-            const result = await axios.post('http://localhost:8080/api/v1/generate-report', {
+            const result = await axios.post('https://patent-infringement-check-17325157242.us-central1.run.app/api/v1/generate-report', {
               patentId: patentId,
               companyName: companyName
             }, { headers: { 'Content-Type': 'application/json' }});
@@ -38,7 +38,7 @@ function InputForm() {
     const handleSaveReport = async () => {
         setSaving(true);
         try {
-            await axios.put('http://localhost:8080/api/v1/report', response, {
+            await axios.put('https://patent-infringement-check-17325157242.us-central1.run.app/api/v1/report', response, {
                 headers: { 'Content-Type': 'application/json' }
             });
             alert('Report saved successfully!');
