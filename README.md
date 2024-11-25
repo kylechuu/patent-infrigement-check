@@ -80,7 +80,7 @@ This project is a Spring Boot application that connects to a local MongoDB insta
     `docker stop <container ID>`
     
 ## FrontEnd
-`[frontend-url](https://frontend-latest-lvpf.onrender.com)`
+[frontend-url](https://frontend-latest-lvpf.onrender.com)
 ## Backend Endpoints
 Once the application is running, you can access the following endpoints:
 
@@ -94,15 +94,15 @@ Once the application is running, you can access the following endpoints:
        3. The info for each candidate will be used to prompt again to generate explanation and infringed patents.
        4. Finally the explanation from top 2 candidate will be used to prompt for the assessment.
           
-- **retrieve report GET**: `[backend-url](https://patent-infringement-check-17325157242.us-central1.run.app)/api/v1/reports`
+- **retrieve report GET**: [backend-url](https://patent-infringement-check-17325157242.us-central1.run.app/api/v1/reports)
   - This endpoint will fetch the report history that is stored priviously.
-- **save report PUT**: `[backend-url](https://patent-infringement-check-17325157242.us-central1.run.app)/api/v1/report`
+- **save report PUT**: [backend-url](https://patent-infringement-check-17325157242.us-central1.run.app/api/v1/report)
   - This endpoint will save the report.
-- **delete report DELETE**: `[backend-url](https://patent-infringement-check-17325157242.us-central1.run.app)/api/v1/report/{id}`
+- **delete report DELETE**: [backend-url](https://patent-infringement-check-17325157242.us-central1.run.app/api/v1/report/{id})
   - This endpoint will delete the report by id shown on report list.
 
 ## Additional Notes
-- **BackEnd Endpoint**: The backend endpoint is deployed in URL `ideological-alverta-side-project-kyle-37574475.koyeb.app/` We can replace `localhost:8080/` part for testing in production if prefer.
+- **BackEnd Endpoint**: The backend endpoint is deployed in URL `https://patent-infringement-check-17325157242.us-central1.run.app/` We can replace `localhost:8080/` part for testing in production if prefer.
 - **Environment Variables**: Ensure sensitive information like API keys is managed securely.
 - **Testing**:
   1. Configure properties setting listed above and prepare the data locally.
@@ -132,10 +132,11 @@ Once the application is running, you can access the following endpoints:
 
 ## TO-DO
 - **Frontend styling**: Obviously, the UI sucks.
-- **Frontend components**: TO-DO
+- **Frontend components**: report and input form.
 - **Prompting algorithm enhancement**: The result from OpenAI is not stable and response formation also has room to improve.
 - **Exception handling**: Scenario for exceptions are not considered comprehensively.
-- **Storing report and retrieving function**: TO-DO
+- **Storing report and retrieving function**: Done.
+- **Fuzzy input handleing**: Using LevenshteinDistance to handle fuzzy input.
 
 ## Reference Links
 - [Docker-download](https://gist.github.com/kupietools/2f9f085228d765da579f0f0702bec33c)
