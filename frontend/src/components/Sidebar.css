@@ -1,0 +1,45 @@
+.sidebar {
+    position: fixed; /* Ensures the sidebar stays in place even when scrolling */
+    top: 0; /* Aligns the top of the sidebar with the viewport */
+    left: 0; /* Positions the sidebar at the left edge of the viewport */
+    width: 250px;
+    min-height: 100vh; /* Makes the sidebar span the full height of the viewport */
+    background-color: var(--base-color-neutral--neutral-light, #f9f9f9);
+    color: var(--text-color-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    border-right: 1px solid var(--border-color-primary);
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensures the sidebar stays above other elements */
+    flex: 0 0 250px; /* Fixed width for the sidebar */
+}
+
+.sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--text-color-primary);
+}
+
+.sidebar-link {
+    text-decoration: none;
+    font-size: 16px;
+    color: var(--link-color-primary);
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: var(--border-radius-small);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: block;
+    width: 100%;
+}
+
+.sidebar-link:hover {
+    background-color: var(--link-color-primary);
+    color: var(--background-color-primary);
+}
+
+.sidebar-link:active {
+    background-color: var(--base-color-neutral--neutral-light, #a3a1a1);
+    color: var(--text-color-primary);
+}

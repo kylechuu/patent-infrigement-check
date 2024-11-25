@@ -25,6 +25,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* align-items: stretch */
+}
+
+.app-layout {
+  display: flex;
+  flex-direction: row; /* Sidebar and content are side by side */
+  min-height: 100vh; /* Full viewport height */
 }
 
 .spinner-container {
@@ -32,69 +39,6 @@
   justify-content: center;
   align-items: center;
   height: 200px; /* Adjust as needed */
-}
-
-/* Titles */
-.app-title {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: var(--text-color-primary);
-}
-
-.app-subtitle {
-  font-size: 16px;
-  margin-bottom: 20px;
-  color: var(--text-color-primary);
-}
-
-/* Form Styles */
-.form-container {
-  width: 100%;
-  max-width: 400px;
-  background-color: var(--background-color-primary);
-  padding: 20px;
-  border-radius: var(--border-radius-small);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--border-color-primary);
-}
-
-.form-group {
-  margin-bottom: 15px;
-  text-align: left;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: var(--text-color-primary);
-}
-
-.form-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid var(--border-color-primary);
-  border-radius: var(--border-radius-small);
-  font-size: 14px;
-  color: var(--text-color-primary);
-  background-color: var(--background-color-primary);
-}
-
-/* Submit Button */
-.submit-button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  color: var(--text-color-primary);
-  background-color: var(--link-color-primary);
-  border: none;
-  border-radius: var(--border-radius-small);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-  background-color: var(--base-color-neutral--neutral-light, #a3a1a1);
 }
 
 /* Response Container */
@@ -115,4 +59,76 @@ label {
   white-space: pre-wrap;
   word-wrap: break-word;
   color: var(--text-color-primary);
+}
+
+.main-content {
+  margin-left: 250px; /* Aligns content to the right of the sidebar */
+  flex: 1; /* Takes up remaining space */
+  padding: 20px;
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+  background-color: var(--background-color-primary, #ffffff);
+  color: var(--text-color-primary);
+  overflow-y: auto;
+}
+
+.sidebar-toggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: var(--button-color-primary, #57dc2f);
+  color: var(--background-color-primary, #ffffff);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius-small, 5px);
+  cursor: pointer;
+  z-index: 1200; /* Above everything */
+  display: none; /* Hidden by default */
+}
+
+@media (max-width: 768px) {
+  .sidebar-toggle {
+      display: block; /* Show toggle button on smaller screens */
+  }
+
+  .sidebar {
+      position: absolute; /* Sidebar overlays content */
+      z-index: 1100;
+      transform: translateX(-250px); /* Hidden by default */
+      transition: transform 0.3s ease;
+  }
+
+  .sidebar.active {
+      transform: translateX(0); /* Visible when active */
+  }
+}
+
+
+@media (max-width: 768px) {
+  .app-layout {
+      flex-direction: column; /* Stack sidebar and content vertically */
+  }
+
+  .sidebar {
+      position: relative; /* Sidebar is part of the flow */
+      width: 100%; /* Full width for sidebar */
+      min-height: auto; /* Adjust height */
+      border-right: none; /* Remove border */
+      box-shadow: none; /* Remove shadow */
+  }
+
+  .main-content {
+      margin-left: 0; /* No margin since sidebar stacks above */
+      padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar h2 {
+      font-size: 16px; /* Smaller title font */
+  }
+
+  .sidebar-link {
+      font-size: 14px; /* Smaller link font */
+      padding: 8px;
+  }
 }

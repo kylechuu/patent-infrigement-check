@@ -1,0 +1,126 @@
+/* Reports Page Container
+.reports-container {
+    padding: 20px;
+    text-align: left;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--background-color-primary);
+    border-radius: var(--border-radius-small);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reports-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: var(--text-color-primary);
+  }
+  
+  .report-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color-primary);
+    border-radius: var(--border-radius-small);
+    background-color: var(--background-color-primary);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .report-item:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  } */
+
+  /* Main Content Styling */
+.main-content {
+    margin-left: 250px; /* This accounts for the sidebar width */
+    padding: 20px;
+    background-color: var(--background-color-primary, #ffffff);
+    color: var(--text-color-primary);
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 24px;
+    color: var(--text-color-primary);
+    margin-bottom: 20px;
+}
+
+.fetch-button {
+    background-color: var(--button-color-primary, #57dc2f);
+    color: var(--background-color-primary, #ffffff);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-small, 5px);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.fetch-button:hover {
+    background-color: var(--button-color-hover, #45b828);
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.reports-container {
+  max-height: 80vh; /* Limit popup height to 80% of the viewport */
+  overflow-y: auto; /* Enable vertical scrolling */
+  background-color: var(--base-color-neutral--neutral-light, #f9f9f9);
+  padding: 20px;
+  border-radius: var(--border-radius-small);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  white-space: pre-wrap;
+  font-family: monospace;
+  color: var(--text-color-primary);
+  text-align: left;
+  width: 90%; /* Adjust width for smaller screens */
+  max-width: 800px;
+  max-height: 80vh;
+  margin: 0 auto; /* Center the popup */
+}
+
+.reports-container pre {
+  margin: 0;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  white-space: pre-wrap; /* Preserve JSON formatting */
+  overflow-x: auto; /* Enable horizontal scrolling for wide content */
+  text-align: left;
+}
+
+.report-item {
+  background-color: #f4f4f4; /* Light background for each report block */
+  border: 1px solid #ddd;   /* Subtle border */
+  border-radius: 8px;       /* Rounded corners */
+  padding: 15px;            /* Padding for spacing */
+  margin-bottom: 10px;      /* Spacing between blocks */
+  font-family: monospace;   /* Monospace font for JSON */
+  overflow-x: auto;         /* Horizontal scrolling for wide content */
+  position: relative;       /* For better button placement */
+}
+
+.delete-button {
+  background-color: #ff4d4d; /* Red for delete button */
+  color: white;             /* White text */
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;              /* Position at the top-right corner */
+}
+
+.delete-button:hover {
+  background-color: #e04343; /* Darker red on hover */
+}
