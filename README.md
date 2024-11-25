@@ -4,8 +4,8 @@
 This project is a Spring Boot application that connects to a local MongoDB instance through MongoDB Compass. For version 1.0 now It includes one main endpoint and is configured to run with Docker Compose.
 
 ## Production application is running!
-- This full stack app is deployed and now it can be accessed directly from the [patent-infiringment-check-app-link](https://valid-emlyn-patlytics-take-home-c1ac8675.koyeb.app/)
-- Both frontend and backend are deployed on [Koyeb](https://www.koyeb.com/) The reason is because it's free!
+- This full stack app is deployed and now it can be accessed directly from the [patent-infiringment-check-app-link](https://frontend-latest-lvpf.onrender.com)
+- Frontend are deployed on [Render](https://render.com/) backend are deployed on [GCP Cloud Run](https://cloud.google.com) The reason is because it's free!
 - The Database is deployed on MongoDB Altas.
 - The API call may be took 15sec ~ 30sec to finish, so please do not fetch the backend too frquent! (the spinging icon, styling, etc. is on the way...) 
 
@@ -13,7 +13,7 @@ This project is a Spring Boot application that connects to a local MongoDB insta
 - **Java**: Java version 21.
 - **Docker** and **Docker Compose**: Version 4.22.1. Make sure Docker and Docker Compose are installed and running.
 - **MongoDB Compass**: You should have MongoDB Compass installed and configured locally.
-- **React**: node 16 (the README for frontend is still in TO-DO)
+- **React**: node 16
 
 ## Configuration
 1. **Application Properties**: 
@@ -51,19 +51,40 @@ This project is a Spring Boot application that connects to a local MongoDB insta
      docker-compose up
      ```
    - Ensure the `spring.data.mongodb.uri` value matches the SPRING_DATA_MONGODB_URI value in the compose.yaml file..
-
+**Alternative**:
+   - frontend build
+     ```bash
+     docker build -t frontend:latest .
+     ```
+   - backend build
+     ```bash
+     docker build -t backend:latest .
+     ```
+   - run docker
+     ```bash
+     docker run -p -d 8080:8080 backend
+     ```
+     ```bash
+     docker run -p -d 80:80 frontend
+     ```
 
 4. **Stop Containers**:
    - To stop the containers, use:
      ```bash
      docker-compose down
      ```
+**Alternative**:
+  - List docker Info:
+    `docker ps`
+  - Stop docker:
+    `docker stop <container ID>`
+    
 ## FrontEnd
-`http://localhost:3000/`
+`[frontend-url](https://frontend-latest-lvpf.onrender.com)`
 ## Backend Endpoints
 Once the application is running, you can access the following endpoints:
 
-- **generate report POST**: `http://localhost:8080/api/v1/generate-report`
+- **generate report POST**: `[backend-url](https://patent-infringement-check-17325157242.us-central1.run.app)/api/v1/generate-report`
   - This endpoint will consume the Json format payload `patentId` as patent id and `companyName` as company name -> Retrieve the company info and patent info -> start prompting the score and patent features given the list of a company and then generate the assessment.
   - Currently, the API does not store the report in the database.
     
@@ -73,9 +94,12 @@ Once the application is running, you can access the following endpoints:
        3. The info for each candidate will be used to prompt again to generate explanation and infringed patents.
        4. Finally the explanation from top 2 candidate will be used to prompt for the assessment.
           
-  
-- **retrieve report GET**: `http://localhost:8080/api/v1/retrieve-report`
-  - TO-DO
+- **retrieve report GET**: `[backend-url](https://patent-infringement-check-17325157242.us-central1.run.app)/api/v1/reports`
+  - This endpoint will fetch the report history that is stored priviously.
+- **save report PUT**: `[backend-url](https://patent-infringement-check-17325157242.us-central1.run.app)/api/v1/report`
+  - This endpoint will save the report.
+- **delete report DELETE**: `[backend-url](https://patent-infringement-check-17325157242.us-central1.run.app)/api/v1/report/{id}`
+  - This endpoint will delete the report by id shown on report list.
 
 ## Additional Notes
 - **BackEnd Endpoint**: The backend endpoint is deployed in URL `ideological-alverta-side-project-kyle-37574475.koyeb.app/` We can replace `localhost:8080/` part for testing in production if prefer.
@@ -117,4 +141,3 @@ Once the application is running, you can access the following endpoints:
 - [Docker-download](https://gist.github.com/kupietools/2f9f085228d765da579f0f0702bec33c)
 - [Java-JDK-21-download](https://www.oracle.com/java/technologies/downloads/)
 - [MongoDB](https://www.mongodb.com/products/platform/atlas-database)
-
